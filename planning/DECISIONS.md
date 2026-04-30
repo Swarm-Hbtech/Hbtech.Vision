@@ -118,7 +118,7 @@ The render core must support two modes from the start:
 **Status:** Accepted as working hypothesis
 
 ### Decision
-FLUX-family models are the primary candidate for final-quality generation in Stage 1, but this is not treated as irreversible doctrine until tested against speed, fidelity, and operational constraints.
+FLUX-family models are the primary final-quality candidate for Stage 1, pending empirical validation against speed, geometry fidelity, VRAM stability, and cost. This is not treated as irreversible doctrine.
 
 ### Why
 - Current research suggests stronger spatial coherence and architectural fidelity

@@ -31,16 +31,33 @@ No curved/experimental geometry unless specifically needed later.
 A normal visual export / screenshot of the chosen Revit view so the team understands what the control image is supposed to represent.
 
 ### B. Depth-like control image
-A black-to-white (or white-to-black, but consistent) **Depth Cueing export** from Revit.
+A **Depth Cueing export** from Revit with one fixed polarity convention used across the entire first batch.
 This is the main MVP-1 control input candidate.
 
-### C. Short scene note
-For each asset, include a short text note with:
+### C. Scene metadata note
+For each asset, include a short structured note with:
 - project name / ID
+- view name
 - view type
 - exterior or interior
+- camera type / perspective note
 - what geometry is critical to preserve
+- known risk / likely failure mode
 - what would count as obvious failure
+
+Recommended template:
+
+```md
+## Scene metadata
+- Project ID:
+- View name:
+- View type:
+- Exterior / Interior:
+- Camera note:
+- Critical geometry:
+- Known risk:
+- Failure criteria:
+```
 
 ### D. Optional style references
 For each project, attach 3–5 reference images if there is a desired visual target.
@@ -78,7 +95,13 @@ Recommended starting configuration:
 - shadows: **off**
 - unnecessary annotations: **off**
 - Depth Cueing: **on**
-- fade direction: keep consistent across all exports
+- fade direction / polarity: keep one convention across all exports
+
+Polarity rule for first batch:
+- choose **one** convention and do not mix it
+- example A: **near = dark, far = light**
+- example B: **near = light, far = dark**
+- only one of these may be used in the first golden dataset batch
 
 If possible, also apply:
 - **line thickening** for cleaner edge readability
@@ -113,6 +136,12 @@ This will help compare:
 - without cube
 - cube near
 - cube offset
+
+At least one first-batch scene must be exported as a mandatory A/B pair:
+- same camera and same scene **with cube**
+- same camera and same scene **without cube**
+
+This pair is required to test whether the scale anchor produces measurable gains in proportion and material realism.
 
 ---
 

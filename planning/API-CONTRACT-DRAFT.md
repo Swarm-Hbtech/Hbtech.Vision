@@ -19,7 +19,7 @@ The API contract should remain stable even if graph internals evolve.
 {
   "request_id": "uuid-or-external-id",
   "mode": "preview",
-  "control_image": "base64_string_or_url",
+  "control_image": "signed_url_or_object_storage_path_or_base64_for_testing",
   "prompt": {
     "style": "modern minimalist",
     "materials": "white stucco, dark wood, black metal window frames",
@@ -54,12 +54,20 @@ Allowed values:
 - `preview`
 - `final`
 
+Any other value must be rejected with `UNSUPPORTED_MODE`.
+
 ### `control_image`
 MVP-1 accepts one control input.
+
 Allowed forms:
-- base64 string
-- signed URL
-- internal object-storage path (future)
+- signed URL (**preferred for production**)
+- internal object-storage path (**preferred for production**)
+- base64 string (**allowed for testing, not preferred for production**)
+
+Production priority should be:
+1. signed URL
+2. object-storage path
+3. base64 only for local/manual testing
 
 ### `prompt`
 Must include structured text fields rather than one opaque mega-prompt where possible.
@@ -108,6 +116,8 @@ Examples:
   "mode": "preview",
   "result": {
     "image_url": "https://...",
+    "artifact_type": "image",
+    "output_format": "png",
     "width": 1024,
     "height": 576,
     "seed": 123456
