@@ -147,6 +147,33 @@ Hbtech.Vision will not be designed as a blind autonomous image factory. Human ap
 
 ---
 
+## ADR-009 — Gemini Flash image as fast concept layer
+
+**Status:** Accepted as optional parallel track
+
+### Decision
+Gemini Flash image generation may be used as a fast, cheap concept/style check layer before or alongside the geometry-controlled ControlNet pipeline.
+
+### Why
+- Text-to-image generation via Gemini Flash is fast and cheap
+- Useful for early style exploration and client communication
+- Does not require depth maps or control images
+- Can serve as a "concept sketch" tier before committing to full render pipeline
+
+### Explicit limitations
+- Gemini Flash image generation does NOT accept depth maps or control images
+- It does NOT preserve building geometry reliably
+- It is NOT a replacement for the ControlNet-based geometry-controlled render core
+- It is NOT reproducible in the same way as seeded ControlNet runs
+
+### Consequence
+- Gemini Flash image may be used as an optional fast concept tier
+- The geometry-controlled ControlNet pipeline remains the primary render core
+- A two-tier visualization model is valid: concept sketch → geometry-accurate render
+- Any Gemini image integration must be clearly labeled as non-geometry-controlled output
+
+---
+
 ## ADR-008 — Depth Cueing beats MiDaS for early MVP if available
 
 **Status:** Accepted as operational preference

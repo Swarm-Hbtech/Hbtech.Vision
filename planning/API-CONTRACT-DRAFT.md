@@ -72,6 +72,13 @@ Production priority should be:
 ### `prompt`
 Must include structured text fields rather than one opaque mega-prompt where possible.
 
+Prompt structure follows the **5-component formula**:
+1. **Subject** — what the building/object is, key physical details
+2. **Action** — lighting condition, time of day, weather, atmosphere
+3. **Location/Context** — surroundings, landscape, environment
+4. **Composition** — camera angle, focal length, framing
+5. **Style** — materials, visual style, reference aesthetic
+
 Minimum expected fields:
 - `style`
 - `materials`
@@ -79,6 +86,19 @@ Minimum expected fields:
 - `lighting`
 - `negative`
 - `scale_anchor`
+
+### `domain_mode` (optional)
+Allows the render core to apply domain-specific expertise.
+
+Supported values for MVP-1 (optional, may be ignored if not set):
+- `exterior_day`
+- `exterior_evening`
+- `exterior_overcast`
+- `interior`
+- `aerial`
+- `detail_facade`
+
+If not provided, the render core uses default exterior_day behavior.
 
 ---
 
